@@ -30,7 +30,7 @@ The database consists of **15 interconnected tables**:
 
 ---
 
-## 🛠️ Setup Instructions
+## Setup Instructions
 
 1. **Create Schema**
     ```sql
@@ -71,8 +71,3 @@ The database consists of **15 interconnected tables**:
 - Monitor service trends and demand
 - Inventory usage analysis across branches
 - Manage leave records for staff
-
----
-
-## 📁 Project Structure
-
