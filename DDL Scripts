@@ -1,0 +1,136 @@
+CREATE SCHEMA salon_desk;
+SET search_path TO salon_desk;
+-- 1. Products
+CREATE TABLE Products (
+    P_ID INT PRIMARY KEY,
+    P_Name VARCHAR(100),
+    P_Description TEXT,
+    P_Category VARCHAR(50),
+    Qty_in_stk INT,
+    P_Price DECIMAL(10, 2),
+    T_ID INT
+);
+
+-- 2. Inventory_Transaction
+CREATE TABLE Inventory_Transaction (
+    T_ID INT PRIMARY KEY,
+    T_Date DATE,
+    T_Type VARCHAR(20),
+    in_qty INT,
+    out_qty INT,
+    B_ID INT
+);
+
+-- 3. Cumulative_Product
+CREATE TABLE Cumulative_Product (
+    B_ID INT,
+    P_ID INT,
+    Total_Stk INT,
+    PRIMARY KEY (B_ID, P_ID)
+);
+
+-- 4. Owner
+CREATE TABLE Owner (
+    O_ID INT PRIMARY KEY,
+    O_Name VARCHAR(100),
+    O_Phone VARCHAR(15),
+    O_Email VARCHAR(100)
+);
+
+-- 5. Branch
+CREATE TABLE Branch (
+    B_ID INT PRIMARY KEY,
+    O_ID INT,
+    B_Name VARCHAR(100),
+    Pin VARCHAR(10),
+    Street VARCHAR(200)
+);
+
+-- 6. Client
+CREATE TABLE Client (
+    C_ID INT PRIMARY KEY,
+    C_Name VARCHAR(100),
+    C_Phone VARCHAR(15),
+    C_Email VARCHAR(100)
+);
+
+-- 7. Appointment
+CREATE TABLE Appointment (
+    A_Id INT PRIMARY KEY,
+    A_time TIME,
+    A_date DATE,
+    A_status VARCHAR(20),
+    E_ID INT,
+    C_ID INT,
+    B_ID INT
+);
+
+-- 8. Employees
+CREATE TABLE Employees (
+    E_ID INT PRIMARY KEY,
+    E_Name VARCHAR(100),
+    Base_Salary DECIMAL(10,2),
+    Join_Date DATE,
+    Leave_Date DATE,
+    Role VARCHAR(50),
+    E_Phone VARCHAR(15),
+    E_Email VARCHAR(100),
+    M_ID INT
+);
+
+-- 9. Manager
+CREATE TABLE Manager (
+    M_ID INT PRIMARY KEY,
+    B_ID INT,
+    M_Phone VARCHAR(15),
+    M_Email VARCHAR(100)
+);
+
+-- 10. Salaries
+CREATE TABLE Salaries (
+    E_ID INT,
+    Year INT,
+    Month INT,
+    Bonus DECIMAL(10,2),
+    Increment DECIMAL(10,2),
+    PRIMARY KEY (E_ID, Year, Month)
+);
+
+-- 11. Invoices
+CREATE TABLE Invoices (
+    Invno INT PRIMARY KEY,
+    Payment_status VARCHAR(20),
+    Total_amount DECIMAL(10,2),
+    A_ID INT
+);
+
+-- 12. Leave
+CREATE TABLE Leave (
+    L_No INT PRIMARY KEY,
+    Reason TEXT,
+    Start_date DATE,
+    End_date DATE,
+    E_ID INT
+);
+
+-- 13. Provides
+CREATE TABLE Provides (
+    E_ID INT,
+    S_ID INT,
+    PRIMARY KEY (E_ID, S_ID)
+);
+
+-- 14. Services
+CREATE TABLE Services (
+    S_ID INT PRIMARY KEY,
+    S_Name VARCHAR(100),
+    S_Price DECIMAL(10,2),
+    Duration INT
+);
+
+--15. Booked_for
+CREATE TABLE Booked_for (
+    A_ID INT,
+    S_ID INT,
+    PRIMARY KEY (A_ID, S_ID)
+);
